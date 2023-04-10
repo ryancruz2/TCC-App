@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Alert,
   Animated,
   StyleSheet,
   TouchableOpacity,
@@ -10,6 +9,8 @@ import {
 import { CurvedBottomBarExpo } from 'react-native-curved-bottom-bar';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Search from './src/pages/search';
 
 LogBox.ignoreAllLogs();
 
@@ -24,7 +25,7 @@ const Screen2 = () => {
 };
 
 export default function App() {
-  const _renderIcon = (routeName, selectedTab) => {
+  const _renderIcon = (routeName: string, selectedTab: string) => {
     let icon = '';
 
     switch (routeName) {
@@ -34,7 +35,9 @@ export default function App() {
       case 'Settings':
         icon = 'settings-outline';
         break;
-      
+      case 'Search':
+        icon = 'search-sharp';
+        break;
     }
 
     return (
@@ -55,7 +58,7 @@ export default function App() {
       </TouchableOpacity>
     );
   };
-
+  const Tab = createBottomTabNavigator();
   return (
     <NavigationContainer>
       <CurvedBottomBarExpo.Navigator
@@ -67,11 +70,11 @@ export default function App() {
         bgColor="white"
         initialRouteName="Home"
         borderTopLeftRight
-        renderCircle={({ selectedTab, navigate }) => (
+        renderCircle={({ navigate }) => (
           <Animated.View style={styles.btnCircleUp}>
             <TouchableOpacity
               style={styles.button}
-              onPress={() => Alert.alert('Click Action')}
+              onPress={() => {navigate("Search")}}
             >
               <Ionicons name={'search-sharp'} color="gray" size={25} />
             </TouchableOpacity>
@@ -89,6 +92,7 @@ export default function App() {
           component={() => <Screen2 />}
           position="RIGHT"
         />
+         <Tab.Screen name="Search" component={Search} />
       </CurvedBottomBarExpo.Navigator>
     </NavigationContainer>
   );
