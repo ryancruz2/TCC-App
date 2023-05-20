@@ -41,14 +41,10 @@ export default function App() {
     }
 
     return (
-      <Ionicons
-        name={icon}
-        size={25}
-        color={routeName === selectedTab ? 'black' : 'gray'}
-      />
+      <Ionicons name={icon} size={25} color={routeName === selectedTab ? 'black' : 'gray'} />
     );
   };
-  const renderTabBar = ({ routeName, selectedTab, navigate }) => {
+  const renderTabBar = ({ routeName, selectedTab, navigate }: any) => {
     return (
       <TouchableOpacity
         onPress={() => navigate(routeName)}
@@ -67,7 +63,7 @@ export default function App() {
         shadowStyle={styles.shawdow}
         height={55}
         circleWidth={50}
-        bgColor="white"
+        bgColor="#f5fffa"
         initialRouteName="Home"
         borderTopLeftRight
         renderCircle={({ navigate }) => (
@@ -76,7 +72,7 @@ export default function App() {
               style={styles.button}
               onPress={() => {navigate("Search")}}
             >
-              <Ionicons name={'search-sharp'} color="gray" size={25} />
+              <Ionicons name={'search-sharp'} size={25} />
             </TouchableOpacity>
           </Animated.View>
         )}
@@ -154,6 +150,6 @@ export const styles = StyleSheet.create({
   },
   screen2: {
     flex: 1,
-    backgroundColor: '#FFEBCD',
+    backgroundColor: '#BFEFFF',
   },
 });

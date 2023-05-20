@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import {
     Animated,
     StyleSheet,
@@ -7,31 +8,32 @@ import {
     LogBox
   } 
 from 'react-native';
-
-import { SearchBar } from '@rneui/themed';
+import { Searchbar } from 'react-native-paper';
 
 function Search() {
-    const [search, setSearch] = useState("");
+    const [searchQuery, setSearchQuery] = useState('');
 
-    const updateSearch = (search: string) => {
-        setSearch(search);
-      };
+    const onChangeSearch = (query: string) => setSearchQuery(query);
 
-      return (
-        <View style={styles.view}>
-          <SearchBar
-            placeholder="Type Here..."
-            onChangeText={updateSearch}
-            value={search}
-          />
-        </View>
-      );
+    return ( <View style={styles.body} >
+              <Searchbar placeholder="Procurar um aparelho" onChangeText={onChangeSearch} value={searchQuery} style={styles.search} />
+          </View> );
+    
 }
 
 const styles = StyleSheet.create({
-    view: {
-      margin: 10,
+    search: {
+        borderRadius: 25,
+        marginTop: "5%",
+        marginLeft: "2%",
+        marginRight: "2%",
+        height: "auto",
+        backgroundColor: "#f5fffa"
     },
+    body:{
+      backgroundColor: '#BFEFFF',
+      height: '100%'
+    }
 });
 
 export default Search;
