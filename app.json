@@ -31,7 +31,8 @@
     "extra": {
       "eas": {
         "projectId": "3378de45-d151-434e-8476-e189fc2a0102"
-      }
+      },
+      "urlApi": "https://panda-sos.purplemeadow-28da1a35.eastus2.azurecontainerapps.io",
     }
   }
 }
