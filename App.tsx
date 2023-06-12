@@ -11,6 +11,8 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Search from './src/pages/search';
+import Settings from './src/pages/settings';
+import ListPhones from './src/pages/mobile';
 
 LogBox.ignoreAllLogs();
 
@@ -18,10 +20,6 @@ const Screen1 = () => {
   return <View style={styles.screen1}>
     
   </View>;
-};
-
-const Screen2 = () => {
-  return <View style={styles.screen2} />;
 };
 
 export default function App() {
@@ -81,11 +79,11 @@ export default function App() {
         <CurvedBottomBarExpo.Screen
           name="Home"
           position="LEFT"
-          component={() => <Screen1 />}
+          component={() => <ListPhones />}
         />
         <CurvedBottomBarExpo.Screen
           name="Settings"
-          component={() => <Screen2 />}
+          component={() => <Settings />}
           position="RIGHT"
         />
          <Tab.Screen name="Search" component={Search} />
@@ -143,13 +141,5 @@ export const styles = StyleSheet.create({
   img: {
     width: 30,
     height: 30,
-  },
-  screen1: {
-    flex: 1,
-    backgroundColor: '#BFEFFF',
-  },
-  screen2: {
-    flex: 1,
-    backgroundColor: '#BFEFFF',
-  },
+  }
 });
