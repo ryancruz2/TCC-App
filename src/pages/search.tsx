@@ -15,7 +15,6 @@ const Search = () => {
       try {
         const response = await requests.get(`/Phones/Search?search=${query}`);
         setSearch(response.data);
-        console.log(query);
       } catch (error) {
         console.log(error);
       }
