@@ -34,5 +34,8 @@
     "@types/react": "~18.0.14",
     "typescript": "^4.9.4"
   },
-  "private": true
+  "private": true,
+  "repository": "https://github.com/RyanCruz-Faculdade/tcc-mobile.git",
+  "author": "Ryan_Cruz <ryanyan733@gmail.com>",
+  "license": "MIT"
 }
