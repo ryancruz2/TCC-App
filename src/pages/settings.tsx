@@ -1,6 +1,6 @@
 import * as Location from 'expo-location';
 import React, {useEffect, useState } from 'react';
-import { Button, Text } from 'react-native';
+import { Button, Text, View, StyleSheet } from 'react-native';
 
 function Settings(){
     const [location, setLocation] = useState<Location.LocationObject["coords"] | null>(null);
@@ -50,15 +50,22 @@ function Settings(){
         }
       };
 
-    return <>
+    return <View style={styles.body}>
         <Button
         title="pegar localização"
         onPress={getLocation}
       />
         <Text>{ JSON.stringify(region) }</Text>
-    </>;
+    </View>;
 }
 
+const styles = StyleSheet.create({
+  body: {
+    alignItems: 'center',
+    backgroundColor: '#098277',
+    height: '100%'
+  },
+});
 export default Settings;
 
 //#098277
