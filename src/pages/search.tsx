@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Animated, StyleSheet, TouchableOpacity, View, LogBox, Text } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, View, Text } from 'react-native';
 import { Card, Searchbar } from 'react-native-paper';
 import { SearchInterface } from '../interface/itf_search';
 import requests from '../utils/requests';
@@ -30,11 +30,11 @@ const Search = () => {
       return null;
     }
 
-    return search.map((phone: SearchInterface) => (
-      <Card key={phone.id}>
+    return search?.map((phone: SearchInterface) => (
+      <Card key={phone.id} style={styles.card}>
         <Card.Content>
           <Text>
-            Nome: {phone.name}
+            {`${phone.maker} ${phone.name}`}
           </Text>
         </Card.Content>
       </Card>
@@ -64,8 +64,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#f5fffa'
   },
   body: {
-    backgroundColor: '#BFEFFF',
+    alignItems: 'center',
+    backgroundColor: '#098277',
     height: '100%'
+  },
+  card: {
+    width: "95%"
   }
 });
 
