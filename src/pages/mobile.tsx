@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import requests from "../utils/requests";
 import { SearchInterface } from "../interface/itf_search";
-import { Card } from "react-native-paper";
+import { Card, Title } from "react-native-paper";
 import { StyleSheet, Text, View, Image } from 'react-native';
 
 function ListPhones(): JSX.Element {
   const [phones, setPhones] = useState<SearchInterface[] | undefined | null>();
 
   const getPhones = async (): Promise<void> => {
-    const response = (await requests.get(`/Phones/Search?search=`)).data as SearchInterface[];
+    const response = (await requests.get(`/api/mobile/phones?`)).data as SearchInterface[];
     setPhones(response);
   };
 
@@ -18,14 +18,14 @@ function ListPhones(): JSX.Element {
     }
   
     return values.map((phone: SearchInterface) => (
-      <Card key={phone.id} style={styles.card}>
+      <Card key={phone._id} style={styles.card}>
         <Card.Content style={styles.cardContent}>
           <View style={styles.imageContainer}>
-            <Image source={{uri: phone.image}} style={styles.image} />
+            <Image source={{uri: phone.Image}} style={styles.image} />
           </View>
           <View style={styles.textContainer}>
             <Text style={styles.text}>
-              {phone.maker} {phone.name}
+              {phone.Maker} {phone.Name}
             </Text>
           </View>
         </Card.Content>
@@ -39,12 +39,20 @@ function ListPhones(): JSX.Element {
 
   return (
     <View style={styles.body}>
+      <Title style={styles.title}>Olá, User</Title>
       {renderCards(phones)}
     </View>
   );
 }
 
 const styles =  StyleSheet.create({
+  title: {
+    textAlign: "left",
+    fontWeight: "bold",
+    color: "white",
+    fontSize: 30,
+    marginTop: "3%"
+  },
   body: {
     flex: 1,
     backgroundColor: '#098277',

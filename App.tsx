@@ -13,15 +13,11 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Search from './src/pages/search';
 import Settings from './src/pages/settings';
 import ListPhones from './src/pages/mobile';
+import { createStackNavigator } from '@react-navigation/stack';
+import { Companies, PageCompany, Phones } from './src/components/MenuSearch';
 
 LogBox.ignoreAllLogs();
-
-const Screen1 = () => {
-  return <View style={styles.screen1}>
-    
-  </View>;
-};
-
+const Stack = createStackNavigator();
 export default function App() {
   const _renderIcon = (routeName: string, selectedTab: string) => {
     let icon = '';
@@ -68,7 +64,7 @@ export default function App() {
           <Animated.View style={styles.btnCircleUp}>
             <TouchableOpacity
               style={styles.button}
-              onPress={() => {navigate("Search")}}
+              onPress={() => { navigate("Search") }}
             >
               <Ionicons name={'search-sharp'} size={25} />
             </TouchableOpacity>
@@ -86,7 +82,10 @@ export default function App() {
           component={() => <Settings />}
           position="RIGHT"
         />
-         <Tab.Screen name="Search" component={Search} />
+        <Stack.Screen name="Phones" component={Phones} />
+        <Stack.Screen name="Companies" component={Companies} />
+        <Tab.Screen name="Search" component={Search} />
+        <Stack.Screen name="PageCompany" component={PageCompany} />
       </CurvedBottomBarExpo.Navigator>
     </NavigationContainer>
   );

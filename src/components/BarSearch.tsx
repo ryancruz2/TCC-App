@@ -3,12 +3,21 @@ import { View, StyleSheet, Text } from 'react-native';
 import { Card, Searchbar } from 'react-native-paper';
 import { SearchInterface } from '../interface/itf_search';
 import requests from '../utils/requests';
-import TabsContainer from '../components/TabsContainer';
-import  MenuSearch  from '../components/MenuSearch';
+interface Product {
+  _id: number;
+  Name: string;
+  Image: string;
+  Maker: string;
+  __v: number;
+  product: {
+    tela: string;
+    bateria: string;
+  };
+}
 
-const App = () => {
+const SearchProduct = (id: number) => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [searchResults, setSearchResults] = useState<ReadonlyArray<SearchInterface>>([]);
+  const [searchResults, setSearchResults] = useState<ReadonlyArray<Product>>([]);
 
   const onChangeSearch = async (query: string) => {
     setSearchQuery(query);
@@ -17,11 +26,13 @@ const App = () => {
         setSearchResults([]);
         return;
       }
-
-      const response = await requests.get(`/api/mobile/phones?search=${query}`);
+      console.log(searchQuery)
+      const response = await requests.get(`/api/cadaster/CompanyPhone?id=${id}&name=${searchQuery}`);
       setSearchResults(response.data);
     } catch (error) {
       console.error('Error fetching data:', error);
+      console.warn(searchResults)
+      setSearchResults([])
       // You could set an error state and display an error message in your UI here
     }
   };
@@ -35,8 +46,6 @@ const App = () => {
         style={styles.searchbar}
         inputStyle={styles.searchInput}
       />
-      <TabsContainer />
-      <MenuSearch />
     </View>
     <View style={styles.card}>{renderSearchResults(searchResults)}</View>
   </View>
@@ -89,12 +98,12 @@ const styles = StyleSheet.create({
   }
 });
 
-const renderSearchResults = (searchResults: ReadonlyArray<SearchInterface>) => {
+const renderSearchResults = (searchResults: ReadonlyArray<Product>) => {
   if (searchResults.length === 0) {
     return null;
   }
 
-  return searchResults.map((phone: SearchInterface) => (
+  return searchResults.map((phone: Product) => (
     <Card key={phone._id} >
       <Card.Content>
         <Text>{`${phone.Maker} ${phone.Name}`}</Text>
@@ -103,4 +112,4 @@ const renderSearchResults = (searchResults: ReadonlyArray<SearchInterface>) => {
   ));
 };
 
-export default App;
+export default SearchProduct;
